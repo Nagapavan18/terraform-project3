@@ -4,6 +4,7 @@ resource "aws_instance" "example" {
   instance_type        = "t2.micro"
   subnet_id            = element(var.public_subnet_ids, count.index)
   vpc_security_group_ids = [var.ec2_sg_id]
+  key_name ="madeeplinux.pem"
 
   user_data = <<-EOF
     #!/bin/bash
