@@ -29,6 +29,4 @@ module "security" {
   source              = "./module/security"
   vpc_id              = module.network.vpc_id
   
-
-
 }
