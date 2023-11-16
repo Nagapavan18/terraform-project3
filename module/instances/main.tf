@@ -10,3 +10,31 @@ resource "aws_instance" "example" {
     Name = "ExampleInstance-${count.index + 1}"
   }
 }
+
+ user_data = <<-EOF
+              #!/bin/bash
+              # Install CodeDeploy agent and Docker
+              sudo apt-get update -y
+              sudo apt-get install -y ruby wget
+
+              # Install CodeDeploy agent
+              cd /home/ubuntu
+              wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+              chmod +x ./install
+              sudo ./install auto
+
+              # Install Docker
+              sudo apt-get install -y docker.io
+              sudo usermod -aG docker ubuntu
+              sudo systemctl enable docker
+              sudo systemctl start docker
+              # Install AWS CLI
+              sudo apt-get install -y awscli
+              # Install mysql
+              sudo apt install mysql-client-core-8.0
+              EOF
+
+  tags = {
+    Name = "ExampleInstance-${count.index + 1}"
+  }
+}
