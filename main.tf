@@ -30,13 +30,23 @@ module "security" {
   vpc_id              = module.network.vpc_id
   
 }
+
+# create s3 bucket
 resource "aws_s3_bucket" "example_bucket" {
   bucket = "my-example-bucket" # Replace with your desired bucket name
-  acl    = "private"           # Access Control List for the bucket (e.g., private, public-read, etc.)
 
   # Optional: Define tags for the bucket
   tags = {
     Name        = "MyExampleBucket"
     Environment = "Production"
   }
+}
+
+resource "aws_s3_bucket_acl" "example_bucket_acl" {
+  bucket = aws_s3_bucket.example_bucket.id
+
+  # Use the region "us-east-1" to match your AWS setup
+  region = "us-east-1"
+
+  acl    = "private" # or any other desired ACL
 }
