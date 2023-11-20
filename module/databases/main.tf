@@ -27,4 +27,6 @@ resource "aws_db_instance" "default" {
   parameter_group_name          = "default.mysql5.7"
   vpc_security_group_ids        = [var.rds_sg_id]
   db_subnet_group_name          = aws_db_subnet_group.example.name
+  skip_final_snapshot           = true  # Avoid creating a final snapshot during deletion
+  final_snapshot_identifier     = "rds-db-snapshot5"  # Provide a different identifier
 }
