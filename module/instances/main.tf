@@ -3,10 +3,6 @@ provider "aws" {
 }
 
 
-resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "statefile-terraform-bucket" # change this
-}
-
 resource "aws_dynamodb_table" "terraform_lock" {
   name           = "terraform-lock"
   billing_mode   = "PAY_PER_REQUEST"
