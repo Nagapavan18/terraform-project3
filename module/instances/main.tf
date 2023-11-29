@@ -22,7 +22,7 @@ resource "aws_instance" "example" {
   subnet_id            = element(var.public_subnet_ids, count.index)
   vpc_security_group_ids = [var.ec2_sg_id]
   key_name ="terraformproject"      # replace your pem file here .
-  iam_instance_profile = "roleforec2codedeploy"
+  iam_instance_profile = "role_for_ec2_deploy"
 
   user_data = <<-EOF
     #!/bin/bash
